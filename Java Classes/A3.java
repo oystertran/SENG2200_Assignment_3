@@ -32,7 +32,7 @@ public class A3 {
         Storage q23 = new Storage(null, Qmax);
         Storage q34 = new Storage(null, Qmax);
         Storage q45 = new Storage(null, Qmax);
-        Storage q56 = new Storage(null, Qmax);
+        Storage q56 = new Storage(null, 99999);
 
     }
 }

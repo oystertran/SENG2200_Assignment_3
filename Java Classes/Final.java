@@ -1,5 +1,5 @@
 public class Final extends Stage{
-    
+
     public Final(){
 
     }
@@ -9,11 +9,11 @@ public class Final extends Stage{
 
     }
     @Override
-    public void addNext(Stage s){
+    public void setNext(Stage s){
 
     }
     @Override
-    public void addPrev(Stage s){
+    public void setPrev(Stage s){
 
     }
 }

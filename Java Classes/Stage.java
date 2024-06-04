@@ -10,8 +10,8 @@ public abstract class Stage{
     private boolean starved;//blocked or not
 
     public abstract void execute();
-    public abstract void addNext(Stage s);
-    public abstract void addPrev(Stage s);
+    public abstract void setNext(Stage s);
+    public abstract void setPrev(Stage s);
 
     //getter methods
     public String getName(){
@@ -20,6 +20,7 @@ public abstract class Stage{
     public Widget getWidget(){
         return widget;
     }
+
     //setter methods
     public void setName(String name){
         this.name = name;

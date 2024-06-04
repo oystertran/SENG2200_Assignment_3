@@ -1,28 +1,26 @@
-import java.util.ArrayList;
 public class Queue {
-    private Widget widget;
-    private ArrayList<Widget> list;
+    private LinkedList<Widget> list;
     private int length;
 
     public Queue(int length){
-        list = new ArrayList<Widget>();
+        list = new LinkedList<Widget>();
         length = 0;
     }
 
     public void enqueue(Widget item){//add item to the tail of the queue
-        list.add(item);
+        list.prepend(item);
         length++;
     }
 
     public Widget dequeue(){
-        Widget item = list.get(0);
-        list.remove(item);
+        Widget item = peek();
+        list.removeHead();;
         length--;
         return item;
     }
 
     public Widget peek(){
-        Widget item = list.get(0);
+        Widget item = list.getHead().getData();
         return item;
     }
 
