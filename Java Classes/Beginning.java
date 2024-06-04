@@ -1,18 +1,12 @@
 public class Beginning extends Stage {
-
-    public Beginning(){
+    public Beginning(String name, Queue<Stage> queue){
+        setName(name);
 
     }
+
+    public Beginning(){}
     @Override
     public void execute(){
-
-    }
-    @Override
-    public void setNext(Stage s){
-
-    }
-    @Override
-    public void setPrev(Stage s){
 
     }
 }

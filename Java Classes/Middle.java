@@ -8,12 +8,4 @@ public class Middle extends Stage{
     public void execute(){
 
     }
-    @Override
-    public void setNext(Stage s){
-
-    }
-    @Override
-    public void setPrev(Stage s){
-
-    }
 }

@@ -1,26 +1,26 @@
-public class Queue {
-    private LinkedList<Widget> list;
+public class Queue<T> {
+    private LinkedList<T> list;
     private int length;
 
     public Queue(int length){
-        list = new LinkedList<Widget>();
+        list = new LinkedList<T>();
         length = 0;
     }
 
-    public void enqueue(Widget item){//add item to the tail of the queue
+    public void enqueue(T item){//add item to the tail of the queue
         list.prepend(item);
         length++;
     }
 
-    public Widget dequeue(){
-        Widget item = peek();
+    public T dequeue(){
+        T item = peek();
         list.removeHead();;
         length--;
         return item;
     }
 
-    public Widget peek(){
-        Widget item = list.getHead().getData();
+    public T peek(){
+        T item = list.getHead().getData();
         return item;
     }
 
