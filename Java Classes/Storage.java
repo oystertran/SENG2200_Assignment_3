@@ -4,7 +4,7 @@ public class Storage<T> {
     private int size;//size of the storage (Qmax)
     public Storage(String name, int size){
         if (size > 1){
-            storage = new Queue<T>(size);
+            storage = new Queue<T>();
             this.name = name;
             this.size = size;
         }else{

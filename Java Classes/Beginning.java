@@ -1,14 +1,17 @@
 public class Beginning extends Stage {
-    private Storage storage;
+    private Storage storage;//inter-stage storage
+    private Queue stageQueue;//stage capacity
     public Beginning(String name, Storage storage){
         setName(name);
-        setWidget(new Widget(name));
+        setWidget(new Widget(name, 0.0));
+        stageQueue = new Queue<>();
         this.storage = storage;
     }
 
     public Beginning(){
-        setT1(0.0);
+        setT1(getWidget().getTime());
     }
+    
     @Override
     public void execute(){
         if (this.isBlocked()){

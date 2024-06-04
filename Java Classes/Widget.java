@@ -8,8 +8,9 @@
  */
 public class Widget {
     private String serial;
+    private double time;
 
-    public Widget(String stage){
+    public Widget(String stage, double time){
         ID singleton = ID.getInstance();//get the singleton object ID
         String x = singleton.getID();//get the ID of the object
         if(stage.equals("SOa")){
@@ -19,9 +20,14 @@ public class Widget {
         }else{
             serial = "ERROR";
         }
+        this.time = time;
     }
 
     public String getSerial(){
         return serial;
+    }
+
+    public double getTime(){
+        return time;
     }
 }

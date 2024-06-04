@@ -1,5 +1,4 @@
 import java.util.Random;
-import java.util.random.*;
 public abstract class Stage{
     private String name;//name of the stage
     private Widget widget;//widget store in stage
@@ -10,7 +9,6 @@ public abstract class Stage{
     private double T1; //starting time
     private double T2; //completion time
     private double d; //random number [0, 1]
-    private Storage storage;//inter-stage storage
     private double time;
     private double starveTime = 0.0;
     private double blockedTime = 0.0;

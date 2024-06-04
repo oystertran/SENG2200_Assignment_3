@@ -2,7 +2,7 @@ public class Queue<T> {
     private LinkedList<T> list;
     private int length;
 
-    public Queue(int length){
+    public Queue(){
         list = new LinkedList<T>();
         length = 0;
     }
