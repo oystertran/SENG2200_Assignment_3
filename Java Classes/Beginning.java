@@ -1,10 +1,10 @@
 public class Beginning extends Stage {
-    private Storage storage;//inter-stage storage
-    private Queue stageQueue;//stage capacity
-    public Beginning(String name, Storage storage){
+    private Storage<Widget> storage;//inter-stage storage
+    private LinkedList<Stage> stageList;//stage capacity
+    public Beginning(String name, Storage<Widget> storage){
         setName(name);
         setWidget(new Widget(name, 0.0));
-        stageQueue = new Queue<>();
+        stageList = new LinkedList<>();
         this.storage = storage;
     }
 
@@ -24,7 +24,17 @@ public class Beginning extends Stage {
             setTime(0.0);
             return;
         }else{
-            storage.add(storage);
+            storage.add(getWidget());
+
+            for (Stage s : stageList){
+                if (s.isStarve()){
+                    s.execute();
+                }
+            }
         }
+        if (!isEmpty()){
+
+        }
+        setWidget(new Widget(getName(), 0));
     }
 }
