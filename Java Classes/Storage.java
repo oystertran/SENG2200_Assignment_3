@@ -2,13 +2,13 @@ public class Storage {
     private String name;//storage name
     private Queue storage;//
     private int size;//size of the storage (Qmax)
-    public Storage(String name, int size) throws Exception{
+    public Storage(String name, int size){
         if (size > 1){
             storage = new Queue(size);
             this.name = name;
             this.size = size;
         }else{
-            throw new Exception("Storage must not be empty");
+            System.out.println("Size has to be at least 1");
         }
         
     }

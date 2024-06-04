@@ -26,5 +26,13 @@ public class A3 {
         Stage s5b = new Middle();
         Stage s6 = new Final();
 
+        //create inter-stage storage
+        Storage q01 = new Storage(null, Qmax);
+        Storage q12 = new Storage(null, Qmax);
+        Storage q23 = new Storage(null, Qmax);
+        Storage q34 = new Storage(null, Qmax);
+        Storage q45 = new Storage(null, Qmax);
+        Storage q56 = new Storage(null, Qmax);
+
     }
 }
