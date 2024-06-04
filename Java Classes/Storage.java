@@ -1,10 +1,10 @@
-public class Storage {
+public class Storage<T> {
     private String name;//storage name
-    private Queue storage;//
+    private Queue<T> storage;//
     private int size;//size of the storage (Qmax)
     public Storage(String name, int size){
         if (size > 1){
-            storage = new Queue(size);
+            storage = new Queue<T>(size);
             this.name = name;
             this.size = size;
         }else{
@@ -18,5 +18,9 @@ public class Storage {
     }
     public int getSize(){
         return size;
+    }
+
+    public void add(T item){
+        storage.enqueue(item);
     }
 }

@@ -12,9 +12,8 @@ public abstract class Stage{
     private double d; //random number [0, 1]
     private Storage storage;//inter-stage storage
     private double time;
-    private double starveTime;
-    private double blockedTime;
-    private double productionTime;
+    private double starveTime = 0.0;
+    private double blockedTime = 0.0;
     private boolean blocked;//starved or not 
     private boolean starved;//blocked or not
 
@@ -94,8 +93,13 @@ public abstract class Stage{
                 P = M + N * (d - 0.5);
         }
     }
-
     public void calcT2(){
         T2 = time + P;
+    }
+    public void incrBlock(double time){
+        blockedTime += time;
+    }
+    public void incrP(double time){
+        P += time;
     }
 }
