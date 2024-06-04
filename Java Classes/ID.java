@@ -1,24 +1,31 @@
+/*
+ * Singleton ID 
+ */
 import java.math.BigInteger;
-import java.util.UUID;
+import java.util.UUID;//universally unique identifier
 public class ID {
     private String ID;
-    private static ID serial;
+    private static ID serial;//variable of type ID
+
+    /*
+     * Private constructor
+     */
     private ID(String ID){
         this.ID = ID;
     }
 
+
+    /*
+     * Private helper method to generate a universally unique string 
+     */
     private static String generateID(){
-        String generateUUIDNo = String.format("%010d",
-        new BigInteger(UUID.randomUUID().toString().replace("-",""),16));
-        String id;
-        id = generateUUIDNo.substring( generateUUIDNo.length() - 10);
-        return id;
+        String uniqueID = UUID.randomUUID().toString();
+        return uniqueID;
     }
 
-    public String getID(){
-        return ID;
-    }
-
+    /*
+     * public method that 
+     */
     public static ID getInstance(){
         ID id = serial;
         if (serial == null){
@@ -29,6 +36,11 @@ public class ID {
                 }
             }
         }
-        return serial;
+        return serial;//return the object
     }
+
+    public String getID(){
+        return ID;
+    }
+
 }

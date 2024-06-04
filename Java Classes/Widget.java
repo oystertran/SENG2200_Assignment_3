@@ -10,8 +10,8 @@ public class Widget {
     private String serial;
 
     public Widget(String stage){
-        ID singleton = ID.getInstance();
-        String x = singleton.getID();
+        ID singleton = ID.getInstance();//get the singleton object ID
+        String x = singleton.getID();//get the ID of the object
         if(stage.equals("SOa")){
             serial = x+"A";
         }else if(stage.equals("SOb")){
