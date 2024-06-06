@@ -25,11 +25,14 @@ public class Beginning extends Stage {
             return;
         }else{
             storage.add(getWidget());
-
-            for (Stage s : stageList){
+            for (int i = 0; i < stageList.size; i++){
+                Node<Stage> node = stageList.getHead();
+                Stage s = node.getData();
                 if (s.isStarve()){
                     s.execute();
+                    break;
                 }
+                node = node.getNext();
             }
         }
         if (!isEmpty()){
