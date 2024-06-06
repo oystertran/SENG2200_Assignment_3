@@ -1,7 +1,8 @@
+import java.util.LinkedList;
 public class Middle extends Stage{
     private Storage<Widget> prevStorage;//inter-stage storage
     private Storage<Widget> nextStorage;//inter-stage storage
-    private LinkedList<Stage> stageList;//stage capacity
+    private LinkedList<Stage> capacity;//stage capacity
     public Middle(String name, Storage<Widget> prevStorage, Storage<Widget> nexStorage){
 
     }
@@ -16,20 +17,18 @@ public class Middle extends Stage{
             unStarve();
             incrBlock(0);
         }else{
-            if(nextStorage.getSize() == 0){
+            if(nextStorage.getSize() == nextStorage.getmax()){
                 setBlock();
                 setTime(0);
                 return;
             }else{
                 nextStorage.add(getWidget());
-                for (int i = 0; i < stageList.size; i++){
-                    Node<Stage> node = stageList.getHead();
-                    Stage s = node.getData();
-                    if (s.isStarve()){
-                        s.execute();
+                for (int i = 0; i < capacity.size(); i++){
+                    Stage current = capacity.get(i);
+                    if (current.isStarve()){
+                        current.execute();
                         break;
                     }
-                    node = node.getNext();
                 }
             }
         }
@@ -40,15 +39,13 @@ public class Middle extends Stage{
             if(!isEmpty()){
 
             }
-            setWidget(prevStorage.pop());
-            for (int i = 0; i < stageList.size; i++){
-                Node<Stage> node = stageList.getHead();
-                Stage s = node.getData();
-                if (s.isStarve()){
-                    s.execute();
+            setWidget(prevStorage.getStorage().dequeue());
+            for (int i = 0; i < capacity.size(); i++){
+                Stage current = capacity.get(i);
+                if (current.isStarve()){
+                    current.execute();
                     break;
                 }
-                node = node.getNext();
             }
         }
     }

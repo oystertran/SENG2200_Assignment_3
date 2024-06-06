@@ -9,25 +9,37 @@
 public class Widget {
     private String serial;
     private double time;
+    private double T1; //starting time
+    private double T2; //completion time
 
-    public Widget(String stage, double time){
+    public Widget(String name){
         ID singleton = ID.getInstance();//get the singleton object ID
         String x = singleton.getID();//get the ID of the object
-        if(stage.equals("SOa")){
+        if(name.equals("SOa")){
             serial = x+"A";
-        }else if(stage.equals("SOb")){
+        }else if(name.equals("SOb")){
             serial = x+"B";
         }else{
             serial = "ERROR";
         }
-        this.time = time;
     }
 
     public String getSerial(){
         return serial;
     }
-
     public double getTime(){
         return time;
+    }
+    public double getT1(){
+        return T1;
+    }
+    public double getT2(){
+        return T2;
+    }
+    public void setT1(double T1){
+        this.T1 = T1;
+    }
+    public void setT2(double T2){
+        this.T2 = T2;
     }
 }

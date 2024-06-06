@@ -1,15 +1,13 @@
+import java.util.LinkedList;
 public class Beginning extends Stage {
-    private Storage<Widget> storage;//inter-stage storage
-    private LinkedList<Stage> stageList;//stage capacity
-    public Beginning(String name, Storage<Widget> storage){
-        setName(name);
-        setWidget(new Widget(name, 0.0));
-        stageList = new LinkedList<>();
-        this.storage = storage;
-    }
+    private Storage<Widget> nextStorage;//inter-stage storage connecting this stage with next stage
+    private LinkedList<Stage> capacity;//stage capacity
+    
+    public Beginning(String name, Storage<Widget> nextStorage){
+        setName(name);//a stage has a name
+        setWidget(new Widget(name));// Beginning stage has widgets
 
-    public Beginning(){
-        setT1(getWidget().getTime());
+        this.nextStorage = nextStorage;
     }
     
     @Override
@@ -19,25 +17,23 @@ public class Beginning extends Stage {
             incrBlock(0);
         }
 
-        if (storage.getSize() == 0){
+        if (nextStorage.getSize() == nextStorage.getmax()){
             setBlock();
             setTime(0.0);
             return;
         }else{
-            storage.add(getWidget());
-            for (int i = 0; i < stageList.size; i++){
-                Node<Stage> node = stageList.getHead();
-                Stage s = node.getData();
-                if (s.isStarve()){
-                    s.execute();
+            nextStorage.add(getWidget());
+            for (int i = 0; i < capacity.size(); i++){
+                Stage current = capacity.get(i);
+                if (current.isStarve()){
+                    current.execute();
                     break;
                 }
-                node = node.getNext();
             }
         }
         if (!isEmpty()){
 
         }
-        setWidget(new Widget(getName(), 0));
+        setWidget(new Widget(getName()));
     }
 }

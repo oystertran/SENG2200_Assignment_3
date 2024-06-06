@@ -1,3 +1,4 @@
+import java.util.LinkedList;
 public class Queue<T> {
     private LinkedList<T> list;
     private int length;
@@ -8,19 +9,19 @@ public class Queue<T> {
     }
 
     public void enqueue(T item){//add item to the tail of the queue
-        list.prepend(item);
+        list.addLast(item);
         length++;
     }
 
     public T dequeue(){
         T item = peek();
-        list.removeHead();;
+        list.removeFirst();;
         length--;
         return item;
     }
 
     public T peek(){
-        T item = list.getHead().getData();
+        T item = list.getFirst();
         return item;
     }
 

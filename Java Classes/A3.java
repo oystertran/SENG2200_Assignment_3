@@ -22,7 +22,7 @@ public class A3 {
         Storage q45 = new Storage("q45", Qmax);
         Storage q56 = new Storage("q56", 99999);// final stage have infinite sized warehouse
 
-        //create all stages
+        //create all stages with inter-stage storage associated to them
         Stage s0a = new Beginning("s0a", q01);
         Stage s0b = new Beginning("s0b", q01);
         Stage s1 = new Middle("s1", q01, q12);

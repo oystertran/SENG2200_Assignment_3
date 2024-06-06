@@ -1,14 +1,7 @@
-import java.util.Random;
+
 public abstract class Stage{
     private String name;//name of the stage
     private Widget widget;//widget store in stage
-    private int Qmax; //capacity
-    private double M; //average processing time
-    private double N; //range of processing time
-    private double P; //procesisng time
-    private double T1; //starting time
-    private double T2; //completion time
-    private double d; //random number [0, 1]
     private double time;
     private double starveTime = 0.0;
     private double blockedTime = 0.0;
@@ -23,6 +16,15 @@ public abstract class Stage{
     public Widget getWidget(){
         return widget;
     }
+    public double getTime(){
+        return time;
+    }
+    public double getStarveTime(){
+        return starveTime;
+    }
+    public double getBlockedTime(){
+        return blockedTime;
+    }
 
     //setter methods
     public void setName(String name){
@@ -34,8 +36,11 @@ public abstract class Stage{
     public void setTime(double time){
         this.time = time;
     }
-    public void setT1(double T1){
-        this.T1 = T1;
+    public void setStarveTime(double starveTime){
+        this.starveTime = starveTime;
+    }
+    public void setBlockedTime(double blockedTime){
+        this.blockedTime = blockedTime;
     }
 
     //stage managing methods
@@ -72,32 +77,11 @@ public abstract class Stage{
         return false;
     }
 
-    //calculation methods
-    public void calcP(){
-        Random r = new Random();
-        d = r.nextDouble();
-        switch (name){
-            case "s0a":
-                P = 2*M + 2*N * (d - 0.5);
-            case "s3a":
-                P = 2*M + 2*N * (d - 0.5);
-            case "s3b":
-                P = 2*M + 2*N * (d - 0.5);
-            case "s5a":
-                P = 2*M + 2*N * (d - 0.5);
-            case "s5b":
-                P = 2*M + 2*N * (d - 0.5);
-            default:
-                P = M + N * (d - 0.5);
-        }
-    }
-    public void calcT2(){
-        T2 = time + P;
-    }
     public void incrBlock(double time){
         blockedTime += time;
     }
-    public void incrP(double time){
-        P += time;
+    public void incrStarve(double time){
+        starveTime += time;
     }
+
 }

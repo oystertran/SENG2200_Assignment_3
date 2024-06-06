@@ -1,3 +1,4 @@
+import java.util.LinkedList;
 public class Final extends Stage{
     private Storage<Widget> storage;//inter-stage storage
     private LinkedList<Stage> stageList;//stage capacity
