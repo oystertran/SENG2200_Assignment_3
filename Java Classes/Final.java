@@ -1,6 +1,7 @@
 public class Final extends Stage{
-
-    public Final(){
+    private Storage<Widget> storage;//inter-stage storage
+    private LinkedList<Stage> stageList;//stage capacity
+    public Final(String name, Storage<Widget> storage){
 
     }
 
