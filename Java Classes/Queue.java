@@ -13,6 +13,11 @@ public class Queue<T> {
         length++;
     }
 
+    public void add(T item){
+        list.addLast(item);
+        length++;
+    }
+
     public T dequeue(){
         T item = peek();
         list.removeFirst();;
@@ -22,6 +27,13 @@ public class Queue<T> {
 
     public T peek(){
         T item = list.getFirst();
+        return item;
+    }
+
+    public T poll(){
+        T item = peek();
+        list.removeFirst();;
+        length--;
         return item;
     }
 

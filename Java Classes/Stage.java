@@ -1,14 +1,33 @@
+import java.util.LinkedList;
+import java.util.PriorityQueue;
 
-public abstract class Stage{
+public class Stage{
     private String name;//name of the stage
     private Widget widget;//widget store in stage
     private double time;
+    private double P;
     private double starveTime = 0.0;
     private double blockedTime = 0.0;
     private boolean blocked;//starved or not 
     private boolean starved;//blocked or not
+    private Storage<Widget> nextStorage;
+    private Storage<Widget> prevStorage;
+    private LinkedList<Stage> nextStage = new LinkedList<>();
+    private LinkedList<Stage> prevStage = new LinkedList<>();
 
-    public abstract void execute();
+    public Stage(String name, Storage<Widget> storage){
+        this.name = name;
+        if(name.equals("s0a") || name.equals("s0b")){
+            nextStorage = storage;
+        }else{
+            prevStorage = storage;
+        }
+    }
+    public Stage(String name, Storage<Widget> nextStorage, Storage<Widget> prevStorage){
+        this.name = name;
+        this.nextStorage = nextStorage;
+        this.prevStorage = prevStorage;
+    }
     //getter methods
     public String getName(){
         return name;
@@ -18,6 +37,18 @@ public abstract class Stage{
     }
     public double getTime(){
         return time;
+    }
+    public Storage<Widget> getNextStorage(){
+        return nextStorage;
+    }
+    public Storage<Widget> getPrevStorage(){
+        return prevStorage;
+    }
+    public LinkedList<Stage> getNextStage(){
+        return nextStage;
+    }
+    public LinkedList<Stage> getPrevStage(){
+        return prevStage;
     }
     public double getStarveTime(){
         return starveTime;
@@ -31,10 +62,27 @@ public abstract class Stage{
         this.name = name;
     }
     public void setWidget(Widget widget){
+        Job job = new Job(this, time);
         this.widget = widget;
     }
     public void setTime(double time){
         this.time = time;
+    }
+    public void setNextStorage(Storage<Widget> nexStorage){
+        this.nextStorage = nexStorage;
+    }
+    public void setPrevStorage(Storage<Widget> prevStorage){
+        this.prevStorage = prevStorage;
+    }
+    public void setNext(Stage next){
+        if (!this.getName().equals("s6")){
+            nextStage.add(next);
+        }
+    }
+    public void setPrev(Stage prev){
+        if (!this.getName().equals("s0a") && (!this.getName().equals("s0b"))){
+            prevStage.add(prev);
+        }
     }
     public void setStarveTime(double starveTime){
         this.starveTime = starveTime;
@@ -76,12 +124,8 @@ public abstract class Stage{
         }
         return false;
     }
-
-    public void incrBlock(double time){
-        blockedTime += time;
-    }
-    public void incrStarve(double time){
-        starveTime += time;
+    public void incrP(double time){
+        P += time;
     }
 
 }

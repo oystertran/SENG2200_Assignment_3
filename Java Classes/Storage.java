@@ -4,7 +4,7 @@ public class Storage<T> {
     private int size;
     private int max;//size of the storage (Qmax)
     public Storage(String name, int max){
-        if (size > 1){
+        if (max > 1){
             storage = new Queue<T>();
             this.name = name;
             this.max = max;
@@ -12,6 +12,12 @@ public class Storage<T> {
             System.out.println("Size has to be at least 1");
         }
         
+    }
+
+    public Storage(String name){
+        storage = new Queue<T>();
+        this.name = name;
+
     }
     //getter methods
     public String getName(){
@@ -21,7 +27,7 @@ public class Storage<T> {
         size = storage.size();
         return size;
     }
-    public int getmax(){
+    public int getMax(){
         return max;
     }
     public Queue<T> getStorage(){
@@ -29,5 +35,9 @@ public class Storage<T> {
     }
     public void add(T item){
         storage.enqueue(item);
+    }
+    public T poll(){
+        T item = storage.poll();
+        return item;
     }
 }
