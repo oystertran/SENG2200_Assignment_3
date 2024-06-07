@@ -33,7 +33,9 @@ public class Stage{
         return name;
     }
     public Widget getWidget(){
-        return widget;
+        Widget temp = widget;
+        widget = null;
+        return temp;
     }
     public double getTime(){
         return time;
@@ -62,7 +64,7 @@ public class Stage{
         this.name = name;
     }
     public void setWidget(Widget widget){
-        Job job = new Job(this, time);
+        Job job = new Job(this);
         this.widget = widget;
     }
     public void setTime(double time){

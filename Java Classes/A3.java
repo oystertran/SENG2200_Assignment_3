@@ -5,7 +5,7 @@ public class A3 {
     private static int Qmax; //capacity
     private static double M; //average processing time
     private static double N; //range of processing time
-    private static double time = 0.0;
+    public static double time = 0.0;
     private static PriorityQueue<Job> jobs = new PriorityQueue<>(5);
     private static LinkedList<Stage> stages = new LinkedList<>();
     
@@ -75,23 +75,22 @@ public class A3 {
         s6.setPrev(s5a);
         s6.setPrev(s5b);
 
-        jobs.add(new Job(s0a, time));
-        jobs.add(new Job(s0b, time));
-        jobs.add(new Job(s1, time));
-        jobs.add(new Job(s2, time));
-        jobs.add(new Job(s2, time));
-        jobs.add(new Job(s3a, time));
-        jobs.add(new Job(s3b, time));
-        jobs.add(new Job(s4, time));
-        jobs.add(new Job(s4, time));
-        jobs.add(new Job(s5a, time));
-        jobs.add(new Job(s5b, time));
+        jobs.add(new Job(s0a));
+        jobs.add(new Job(s0b));
+        jobs.add(new Job(s1));
+        jobs.add(new Job(s2));
+        jobs.add(new Job(s2));
+        jobs.add(new Job(s3a));
+        jobs.add(new Job(s3b));
+        jobs.add(new Job(s4));
+        jobs.add(new Job(s4));
+        jobs.add(new Job(s5a));
+        jobs.add(new Job(s5b));
 
-        while (time < 10){
+        while (time < 5){
             Job current = jobs.poll();
             time = current.getT2();
-            current.dispatch(time);
-            time ++;
+            current.dispatch();
         }
 
     }

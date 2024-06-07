@@ -1,6 +1,5 @@
 import java.util.Random;
 import java.util.LinkedList;
-import java.util.PriorityQueue;
 
 public class Job implements Comparable<Job>{
     private Stage processingStage;//reference to the locatin that event occur
@@ -10,13 +9,11 @@ public class Job implements Comparable<Job>{
     private double N; //range of processing time
     private double P; //processing time
     private double d; //random number [0, 1]
-    private double time;
     private LinkedList<Widget> doneList = new LinkedList<>();
 
-    public Job(Stage processingStage, double T1){
-        this.T1 = T1;
+    public Job(Stage processingStage){
         calcP(processingStage.getName());
-        T2 = T1 + P;
+        T2 = A3.time + P;
         processingStage.incrP(P);
         this.processingStage = processingStage;
     }
@@ -75,12 +72,12 @@ public class Job implements Comparable<Job>{
         return doneList;
     } 
 
-    public void dispatch(double time){
+    public void dispatch(){
         if (processingStage.getName() == "s0a" || processingStage.getName() == "s0b"){//
             //at first check if the stage is blocked or not 
             if (processingStage.isBlocked()){
                 processingStage.unBlock();
-                processingStage.setBlockedTime(processingStage.getBlockedTime() + T1 - processingStage.getTime());
+                processingStage.setBlockedTime(processingStage.getBlockedTime() + A3.time - processingStage.getTime());
             }
             //take an item out of the stage
             if (processingStage.getNextStorage().getSize() == processingStage.getNextStorage().getMax()){//if the current size of strage == Qmax
@@ -91,26 +88,28 @@ public class Job implements Comparable<Job>{
                 processingStage.getNextStorage().add(processingStage.getWidget());
                 for (Stage stage : processingStage.getNextStage()){
                     if (stage.isStarve()){
-                        dispatch(time);
+                        dispatch();
                         break;
                     }
                 }
             }
-            processingStage.setWidget(new Widget(processingStage.getName()));
+            if(processingStage.getWidget() == null){
+                processingStage.setWidget(new Widget(processingStage.getName()));
+            }
         }else if (processingStage.getName() == "s6"){
             if (processingStage.isStarve()){
                 processingStage.unStarve();
-                processingStage.setStarveTime(T1 = processingStage.getTime());
+                processingStage.setStarveTime(A3.time - processingStage.getTime());
             }
             doneList.add(processingStage.getWidget());
             if (processingStage.getPrevStorage().getSize() == 0){
                 processingStage.setStarve();
-                processingStage.setTime(T1);
+                processingStage.setTime(A3.time);
             }else{
                 processingStage.setWidget(processingStage.getPrevStorage().poll());
                 for (Stage stage : processingStage.getPrevStage()){
                     if (stage.isBlocked()){
-                        dispatch(time);
+                        dispatch();
                         break;
                     }
                 }
@@ -118,28 +117,36 @@ public class Job implements Comparable<Job>{
         }else{
             if (processingStage.isBlocked()){
                 processingStage.unBlock();
-                processingStage.setBlockedTime(processingStage.getBlockedTime() + T1 - processingStage.getTime());
+                processingStage.setBlockedTime(processingStage.getBlockedTime() + A3.time - processingStage.getTime());
             }
             if (processingStage.isStarve()){
                 processingStage.unStarve();
-                processingStage.setStarveTime(processingStage.getBlockedTime() + T1 - processingStage.getTime());
+                processingStage.setStarveTime(processingStage.getStarveTime() + A3.time - processingStage.getTime());
             }else{
-                processingStage.getNextStorage().add(processingStage.getWidget());
-                for (Stage stage : processingStage.getNextStage()){
-                    if (stage.isStarve()){
-                        dispatch(time);
-                        break;
+                if (processingStage.getNextStorage().getSize() == processingStage.getNextStorage().getMax()){
+                    processingStage.setBlock();
+                    processingStage.setTime(A3.time);
+                    return;
+                }else{
+                    processingStage.getNextStorage().add(processingStage.getWidget());
+                    for (Stage stage : processingStage.getNextStage()){
+                        if (stage.isStarve()){
+                            dispatch();
+                            break;
+                        }
                     }
                 }
             }
             if (processingStage.getPrevStorage().getSize() == 0){
                 processingStage.setStarve();
-                processingStage.setTime(T1);
+                processingStage.setTime(A3.time);
             }else{
-                processingStage.setWidget(processingStage.getPrevStorage().poll());
+                if(processingStage.getWidget() == null){
+                    processingStage.setWidget(processingStage.getPrevStorage().poll());
+                }
                 for (Stage stage : processingStage.getNextStage()){
                     if (stage.isStarve()){
-                        dispatch(time);
+                        dispatch();
                         break;
                     }
                 }
